@@ -128,5 +128,5 @@ class AuditLog(Base):
     action: Mapped[str] = mapped_column(String)
     entity_type: Mapped[str] = mapped_column(String)
     entity_id: Mapped[str] = mapped_column(String)
-    metadata: Mapped[dict] = mapped_column(JSONB, default={})
+    meta: Mapped[dict] = mapped_column("metadata", JSONB, default={})
     created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)

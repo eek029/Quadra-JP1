@@ -1,31 +1,37 @@
 import Link from "next/link";
+import { Send, Twitter } from "lucide-react"; // Using Lucide icons for cleaner look
 
 export function Footer() {
     return (
-        <footer className="w-full border-t border-white/10 text-xs text-white/60">
-            <div className="mx-auto max-w-5xl px-4 py-3 flex flex-col sm:flex-row items-center justify-between gap-2">
-                <span className="select-none">
-                    © 2026 eek029 Sistemas e Automação. Todos os direitos reservados.
+        <footer className="w-full text-[10px] text-gray-400 py-6 mb-16 text-center">
+            <div className="mx-auto max-w-sm px-6 flex flex-col items-center gap-2">
+                <span className="select-none leading-relaxed">
+                    © 2026 eek029 Sistemas e Automação.<br />Todos os direitos reservados.
                 </span>
-                <nav className="flex items-center gap-3">
+
+                {/* Social Links */}
+                <div className="flex items-center gap-4 mt-1">
                     <Link
                         href="https://t.me/eek029"
-                        className="hover:text-white/90 transition-colors"
+                        className="flex items-center gap-1 hover:text-indigo-500 transition-colors"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        Telegram
+                        <Send className="w-3 h-3" />
+                        <span>Telegram</span>
                     </Link>
-                    <span className="text-white/30">•</span>
+                    <span className="text-gray-300">•</span>
                     <Link
                         href="https://x.com/eek029"
-                        className="hover:text-white/90 transition-colors"
+                        className="flex items-center gap-1 hover:text-indigo-500 transition-colors"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
-                        X
+                        {/* X logo fallback using text or custom svg if preferred, using text for simplicity or Twitter icon */}
+                        <span className="font-bold text-xs">X</span>
+                        <span>Twitter</span>
                     </Link>
-                </nav>
+                </div>
             </div>
         </footer>
     );

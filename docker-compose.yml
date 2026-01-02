@@ -2,7 +2,7 @@ version: '3.8'
 
 services:
   backend:
-    build: 
+    build:
       context: ./backend
     ports:
       - "8000:8000"
@@ -17,6 +17,8 @@ services:
       - OAUTH_REDIRECT_URI=${OAUTH_REDIRECT_URI}
       - CORS_ORIGINS=${CORS_ORIGINS}
       - SENTRY_DSN=${SENTRY_DSN}
+    dns:
+      - 8.8.8.8
     depends_on:
       - redis
       # - db # Enable if running local db
@@ -38,7 +40,6 @@ services:
     image: redis:7-alpine
     ports:
       - "6379:6379"
-
   # Local DB for development - Optional if using Supabase
   # db:
   #   image: postgres:15-alpine
@@ -51,5 +52,5 @@ services:
   #   volumes:
   #     - postgres_data:/var/lib/postgresql/data
 
-# volumes:
-#   postgres_data:
+  # volumes:
+  #   postgres_data:

@@ -1,10 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Loader2 } from "lucide-react";
 
-export default function AuthCallback() {
+function CallbackContent() {
     const router = useRouter();
     const searchParams = useSearchParams();
     const [error, setError] = useState("");
@@ -12,7 +12,6 @@ export default function AuthCallback() {
     useEffect(() => {
         const token = searchParams.get("token");
         if (token) {
-            // Store token (in real app use more secure storage or httpOnly cookies via backend)
             localStorage.setItem("token", token);
             router.push("/dashboard");
         } else {
@@ -28,12 +27,24 @@ export default function AuthCallback() {
                     <div className="text-red-300 mb-2">{error}</div>
                 ) : (
                     <>
-                        <Loader2 className="w-10 h-10 text-white animate-spin mx-auto mb-4" />
-                        <h2 className="text-xl font-semibold">Autenticando...</h2>
-                        <p className="text-white/60 text-sm mt-2">Por favor aguarde.</p>
+                        <Loader2 className="w-10 h-10 text-emerald-500 animate-spin mx-auto mb-4" />
+                        <h2 className="text-xl font-semibold text-gray-700">Autenticando...</h2>
+                        <p className="text-gray-400 text-sm mt-2">Por favor aguarde.</p>
                     </>
                 )}
             </div>
         </div>
+    );
+}
+
+export default function AuthCallback() {
+    return (
+        <Suspense fallback={
+            <div className="flex-1 flex items-center justify-center">
+                <Loader2 className="w-10 h-10 text-emerald-500 animate-spin" />
+            </div>
+        }>
+            <CallbackContent />
+        </Suspense>
     );
 }
